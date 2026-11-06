@@ -1,0 +1,30 @@
+# Goal Stack Planning - Blocks World
+
+state = {'A': 'TABLE', 'B': 'TABLE', 'C': 'A'}
+
+def clear(x):
+    for b, s in list(state.items()):
+        if s == x:
+            clear(b)
+            print("UNSTACK", b, x)
+            print("PUTDOWN", b)
+            state[b] = 'TABLE'
+
+def move(x, y):
+    clear(x)
+    clear(y)
+
+    if state[x] == 'TABLE':
+        print("PICKUP", x)
+    else:
+        print("UNSTACK", x, state[x])
+
+    print("STACK", x, y)
+    state[x] = y
+
+# Goal: A -> B -> C
+move('B', 'A')
+move('C', 'B')
+
+print("\nFinal State:", state)
+print("Goal Achieved!")
